@@ -13,3 +13,10 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   workingDirectory: src
   displayName: 'dotnet build $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: '**/*[Tt]ests/*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'

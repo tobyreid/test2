@@ -11,4 +11,5 @@ variables:
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
+  workingDirectory: src
   displayName: 'dotnet build $(buildConfiguration)'

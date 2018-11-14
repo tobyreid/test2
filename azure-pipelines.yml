@@ -3,13 +3,19 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-pool:
-  vmImage: 'Ubuntu 16.04'
-
-variables:
-  buildConfiguration: 'Release'
+resources:
+- repo: self
+queue:
+  name: Hosted VS2017
 
 steps:
+- task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+
+
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
@@ -24,6 +30,7 @@ steps:
     projects: '**/*[Tt]ests/*.csproj'
     arguments: '--configuration $(BuildConfiguration)'
 
+
 - task: DotNetCoreCLI@2
   displayName: Publish
   inputs:
@@ -31,6 +38,7 @@ steps:
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
     zipAfterPublish: True
+
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'

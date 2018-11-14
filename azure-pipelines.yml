@@ -13,7 +13,7 @@ steps:
   displayName: Restore
   inputs:
     command: restore
-    projects: '**/*.csproj'y
+    projects: '**/*.csproj'
 
 
 - task: DotNetCoreCLI@2

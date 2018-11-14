@@ -22,10 +22,10 @@ steps:
     arguments: '--configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  workingDirectory: src
   displayName: Publish
   inputs:
     command: publish
-    workingDirectory: src
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
     zipAfterPublish: True

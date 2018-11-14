@@ -3,8 +3,11 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-resources:
-- repo: self
+trigger:
+- master
+- integration
+- features/*
+
 queue:
   name: Hosted VS2017
 

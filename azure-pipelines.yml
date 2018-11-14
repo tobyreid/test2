@@ -10,9 +10,12 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  workingDirectory: src
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    projects: '**/*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
+
 
 - task: DotNetCoreCLI@2
   displayName: Test
@@ -22,7 +25,6 @@ steps:
     arguments: '--configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
-  workingDirectory: src
   displayName: Publish
   inputs:
     command: publish
